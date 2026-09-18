@@ -1,0 +1,33 @@
+.page {
+          max-width: 560px;
+          margin: 0 auto;
+          padding: 96px 24px 120px;
+          text-align: center;
+        }
+
+        .kicker {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          color: var(--teal);
+          font-weight: 600;
+          font-size: 0.85rem;
+          margin: 0 0 20px;
+        }
+
+        .dot {
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background: var(--teal);
+        }
+
+        .page :global(h1) {
+          font-size: clamp(1.8rem, 4vw, 2.2rem);
+          font-weight: 700;
+        }
+
+        .sub {
+          margin-top: 16px;
+          color: var(--ink-soft);
+        }

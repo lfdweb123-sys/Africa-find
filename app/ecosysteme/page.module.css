@@ -1,0 +1,121 @@
+.page {
+          max-width: 900px;
+          margin: 0 auto;
+          padding: 0 24px 96px;
+        }
+
+        .hero {
+          text-align: center;
+          padding: 80px 0 56px;
+        }
+
+        .kicker {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          color: var(--teal);
+          font-weight: 600;
+          font-size: 0.85rem;
+          margin: 0 0 20px;
+        }
+
+        .dot {
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background: var(--teal);
+        }
+
+        .page :global(h1) {
+          font-size: clamp(2rem, 4.5vw, 2.8rem);
+          font-weight: 700;
+        }
+
+        .sub {
+          margin: 18px auto 0;
+          max-width: 54ch;
+          color: var(--ink-soft);
+          font-size: 1.05rem;
+        }
+
+        .steps {
+          display: flex;
+          flex-direction: column;
+          gap: 28px;
+          padding: 40px 0;
+          border-top: 1px solid var(--line);
+          border-bottom: 1px solid var(--line);
+        }
+
+        .step {
+          display: flex;
+          gap: 20px;
+          align-items: flex-start;
+        }
+
+        .step-num {
+          font-family: var(--font-display);
+          font-weight: 700;
+          color: var(--teal);
+          font-size: 1.1rem;
+          flex-shrink: 0;
+        }
+
+        .page :global(h3) {
+          font-family: var(--font-display);
+          font-size: 1.05rem;
+          margin: 0 0 6px;
+        }
+
+        .step p {
+          margin: 0;
+          color: var(--ink-soft);
+        }
+
+        .categories {
+          padding-top: 56px;
+          text-align: center;
+        }
+
+        .page :global(h2) {
+          font-size: 1.6rem;
+          margin: 0 0 32px;
+        }
+
+        .grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 16px;
+          text-align: left;
+        }
+
+        .card {
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+          padding: 20px;
+          border: 1px solid var(--line);
+          border-radius: 8px;
+          background: var(--paper-raised);
+          text-decoration: none;
+        }
+
+        .card:hover {
+          border-color: var(--teal);
+        }
+
+        .card-title {
+          font-weight: 600;
+          color: var(--ink);
+        }
+
+        .card-hint {
+          font-size: 0.85rem;
+          color: var(--ink-soft);
+        }
+
+        @media (max-width: 700px) {
+          .grid {
+            grid-template-columns: 1fr 1fr;
+          }
+        }

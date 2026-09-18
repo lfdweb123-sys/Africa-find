@@ -1,4 +1,6 @@
 import "./globals.css";
+import NavBar from "@/components/NavBar";
+import Footer from "@/components/Footer";
 
 export const metadata = {
   title: "Africa Find",
@@ -25,7 +27,11 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body>{children}</body>
+      <body>
+        <NavBar />
+        {children}
+        <Footer />
+      </body>
     </html>
   );
 }
