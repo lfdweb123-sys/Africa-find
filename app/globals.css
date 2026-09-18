@@ -6,9 +6,37 @@
   --gold: #d99a2b;
   --teal: #1f7a72;
   --line: rgba(16, 24, 43, 0.14);
+  --nav-bg: rgba(255, 255, 255, 0.9);
   --radius: 3px;
   --font-display: "Space Grotesk", system-ui, sans-serif;
   --font-body: "Inter", system-ui, sans-serif;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ink: #eef0f5;
+    --ink-soft: #a7afc2;
+    --paper: #0b0f1a;
+    --paper-raised: #141a29;
+    --gold: #e3b04f;
+    --teal: #35a89b;
+    --line: rgba(255, 255, 255, 0.12);
+    --nav-bg: rgba(11, 15, 26, 0.85);
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --ink: #eef0f5;
+  --ink-soft: #a7afc2;
+  --paper: #0b0f1a;
+  --paper-raised: #141a29;
+  --gold: #e3b04f;
+  --teal: #35a89b;
+  --line: rgba(255, 255, 255, 0.12);
+  --nav-bg: rgba(11, 15, 26, 0.85);
+  color-scheme: dark;
 }
 
 * {
@@ -38,6 +66,7 @@ body {
   font-family: var(--font-body);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  transition: background 0.2s ease, color 0.2s ease;
 }
 
 h1,

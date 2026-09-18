@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import ThemeToggle from "./ThemeToggle";
 import styles from "./NavBar.module.css";
 
 const desktopLinks = [
@@ -58,6 +59,8 @@ export default function NavBar() {
           </Link>
         </div>
 
+        <ThemeToggle />
+
         <button
           type="button"
           className={styles["burger"]}
@@ -91,6 +94,10 @@ export default function NavBar() {
           <Link href="/connexion" className={styles["ghost"]} onClick={() => setOpen(false)}>
             Se connecter
           </Link>
+          <div className={styles["mobile-theme"]}>
+            <span>Apparence</span>
+            <ThemeToggle />
+          </div>
         </div>
       </div>
     </header>

@@ -3,7 +3,7 @@
   top: 0;
   z-index: 100;
   border-bottom: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.9);
+  background: var(--nav-bg);
   backdrop-filter: blur(8px);
   transition: box-shadow 0.2s ease, border-color 0.2s ease;
 }
@@ -154,6 +154,15 @@
   padding: 9px 16px;
   border: 1px solid var(--line);
   border-radius: var(--radius);
+}
+
+.mobile-theme {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 4px;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
 }
 
 @media (max-width: 1280px) {
