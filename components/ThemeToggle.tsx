@@ -7,10 +7,7 @@ import styles from "./ThemeToggle.module.css";
 type Theme = "light" | "dark";
 
 function getSystemTheme(): Theme {
-  if (typeof window === "undefined") return "light";
-  return window.matchMedia("(prefers-color-scheme: dark)").matches
-    ? "dark"
-    : "light";
+  return "light";
 }
 
 export default function ThemeToggle() {

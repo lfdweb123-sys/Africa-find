@@ -13,20 +13,6 @@
   color-scheme: light;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --ink: #eef0f5;
-    --ink-soft: #a7afc2;
-    --paper: #0b0f1a;
-    --paper-raised: #141a29;
-    --gold: #e3b04f;
-    --teal: #35a89b;
-    --line: rgba(255, 255, 255, 0.12);
-    --nav-bg: rgba(11, 15, 26, 0.85);
-    color-scheme: dark;
-  }
-}
-
 :root[data-theme="dark"] {
   --ink: #eef0f5;
   --ink-soft: #a7afc2;

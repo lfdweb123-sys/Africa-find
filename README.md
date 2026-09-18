@@ -37,6 +37,13 @@ Copie `.env.example` vers `.env.local` en développement, et configure les même
 
 `FIREBASE_PRIVATE_KEY` : colle la clé telle quelle depuis le JSON de la clé de service, avec les `\n` littéraux — le code les convertit automatiquement en vrais retours à la ligne.
 
+## Activer la connexion par lien email (`/connexion`, `/newsletter`)
+
+1. Dans la [Console Firebase](https://console.firebase.google.com) → **Authentication** → **Sign-in method** → active **Email/Password**, puis coche l&rsquo;option **Email link (passwordless sign-in)**.
+2. Toujours dans Authentication → **Settings** → **Authorized domains** → ajoute le domaine Vercel du projet (`<ton-projet>.vercel.app`) et ton domaine personnalisé si tu en as un.
+3. Dans **Paramètres du projet** → **Vos applications** → ajoute une application Web si ce n&rsquo;est pas déjà fait, puis copie `apiKey`, `authDomain`, `projectId` et `appId` dans les variables `NEXT_PUBLIC_FIREBASE_*` (voir `.env.example`). Ces valeurs sont publiques par nature (elles s&rsquo;affichent dans le navigateur), contrairement à la clé de service Admin.
+4. Les utilisateurs qui se connectent via `/connexion` ou s&rsquo;inscrivent via `/newsletter` apparaissent directement dans **Authentication → Users** de la console Firebase.
+
 ## Déploiement sur Vercel
 
 1. Pousse ce dossier dans un repo GitHub.

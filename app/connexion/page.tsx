@@ -1,27 +1,18 @@
 "use client";
 
 import { useState } from "react";
-import { UserRound, BellRing } from "lucide-react";
+import { UserRound, MailCheck, LogOut } from "lucide-react";
+import { useEmailLinkAuth } from "@/hooks/useEmailLinkAuth";
 import styles from "./page.module.css";
 
 export default function ConnexionPage() {
+  const { user, linkStatus, errorMessage, unavailable, sendLink, logout } =
+    useEmailLinkAuth("/connexion");
   const [email, setEmail] = useState("");
-  const [status, setStatus] = useState<"idle" | "loading" | "done" | "error">("idle");
 
-  async function handleSubmit(e: React.FormEvent) {
+  function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    setStatus("loading");
-    try {
-      const res = await fetch("/api/waitlist", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
-      });
-      if (!res.ok) throw new Error();
-      setStatus("done");
-    } catch {
-      setStatus("error");
-    }
+    if (email) sendLink(email);
   }
 
   return (
@@ -33,20 +24,28 @@ export default function ConnexionPage() {
         <span className={styles["dot"]} />
         Espace compte
       </p>
-      <h1>Les comptes arrivent bientôt</h1>
+      <h1>Se connecter</h1>
       <p className={styles["sub"]}>
-        Aujourd&rsquo;hui, le service fonctionne sans compte : chaque
-        recherche est traitée à la volée, sans historique lié à une
-        identité. Un espace compte (historique de recherches, favoris,
-        alertes) est prévu pour la suite.
+        Pas de mot de passe à retenir : on t&rsquo;envoie un lien par email,
+        tu cliques dessus et c&rsquo;est fait.
       </p>
 
-      {status === "done" ? (
-        <div className={styles["success"]}>
-          <BellRing size={18} strokeWidth={1.8} />
-          <span>C&rsquo;est noté, on te préviendra à cette adresse.</span>
+      {user === undefined && !unavailable && (
+        <p className={styles["loading"]}>Vérification de ta session…</p>
+      )}
+
+      {user && (
+        <div className={styles["account"]}>
+          <p className={styles["accountEmail"]}>{user.email}</p>
+          <p className={styles["accountNote"]}>Tu es connecté.</p>
+          <button type="button" className={styles["logout"]} onClick={logout}>
+            <LogOut size={16} strokeWidth={1.8} />
+            Se déconnecter
+          </button>
         </div>
-      ) : (
+      )}
+
+      {user === null && !unavailable && linkStatus !== "sent" && (
         <form className={styles["form"]} onSubmit={handleSubmit}>
           <input
             type="email"
@@ -56,13 +55,35 @@ export default function ConnexionPage() {
             onChange={(e) => setEmail(e.target.value)}
             className={styles["input"]}
           />
-          <button type="submit" className={styles["submit"]} disabled={status === "loading"}>
-            {status === "loading" ? "Envoi…" : "Être averti au lancement"}
+          <button
+            type="submit"
+            className={styles["submit"]}
+            disabled={linkStatus === "sending" || linkStatus === "completing"}
+          >
+            {linkStatus === "sending" ? "Envoi…" : "Recevoir mon lien"}
           </button>
         </form>
       )}
-      {status === "error" && (
-        <p className={styles["error"]}>Une erreur est survenue, réessaie.</p>
+
+      {linkStatus === "sent" && (
+        <div className={styles["success"]}>
+          <MailCheck size={18} strokeWidth={1.8} />
+          <span>
+            Un lien de connexion vient d&rsquo;être envoyé à {email}. Ouvre-le
+            depuis cet appareil pour te connecter.
+          </span>
+        </div>
+      )}
+
+      {linkStatus === "error" && errorMessage && (
+        <p className={styles["error"]}>{errorMessage}</p>
+      )}
+
+      {unavailable && (
+        <p className={styles["error"]}>
+          La connexion par email n&rsquo;est pas encore activée sur ce
+          déploiement.
+        </p>
       )}
     </main>
   );

@@ -60,6 +60,9 @@ export default function Footer() {
           <Link href="/status" className={styles["item"]}>
             Statut du service
           </Link>
+          <Link href="/newsletter" className={styles["item"]}>
+            Rester informé
+          </Link>
         </div>
 
         <div className={styles["col"]}>
