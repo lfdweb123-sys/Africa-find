@@ -8,6 +8,11 @@ export const metadata = {
     "Trouve un vendeur, un développeur ou une formation numérique en Afrique",
 };
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+};
+
 export default function RootLayout({
   children,
 }: {

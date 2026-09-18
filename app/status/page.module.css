@@ -1,0 +1,152 @@
+.page {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 72px 24px 96px;
+}
+
+.kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--teal);
+  font-weight: 600;
+  font-size: 0.85rem;
+  margin: 0 0 20px;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--teal);
+  flex-shrink: 0;
+}
+
+.page h1 {
+  font-size: clamp(1.7rem, 4vw, 2.4rem);
+  font-weight: 700;
+}
+
+.sub {
+  margin: 16px 0 40px;
+  max-width: 62ch;
+  color: var(--ink-soft);
+}
+
+.loading,
+.error {
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+
+.error {
+  color: #b23b32;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--paper-raised);
+}
+
+.row-info {
+  min-width: 0;
+}
+
+.row-heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.led {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.led.teal {
+  background: var(--teal);
+  box-shadow: 0 0 0 4px rgba(31, 122, 114, 0.15);
+}
+
+.led.gold {
+  background: var(--gold);
+  box-shadow: 0 0 0 4px rgba(217, 154, 43, 0.15);
+}
+
+.led.down {
+  background: #b23b32;
+  box-shadow: 0 0 0 4px rgba(178, 59, 50, 0.15);
+}
+
+.label {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.badge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+
+.badge.teal {
+  color: var(--teal);
+  background: rgba(31, 122, 114, 0.1);
+}
+
+.badge.gold {
+  color: var(--gold);
+  background: rgba(217, 154, 43, 0.14);
+}
+
+.badge.down {
+  color: #b23b32;
+  background: rgba(178, 59, 50, 0.1);
+}
+
+.desc {
+  margin: 8px 0 4px;
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+}
+
+.meta {
+  margin: 0;
+  color: #8b93a7;
+  font-size: 0.78rem;
+}
+
+.timestamp {
+  margin-top: 24px;
+  color: var(--ink-soft);
+  font-size: 0.85rem;
+  text-align: right;
+}
+
+@media (max-width: 560px) {
+  .page {
+    padding: 56px 16px 72px;
+  }
+
+  .row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+}

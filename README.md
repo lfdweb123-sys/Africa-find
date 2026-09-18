@@ -9,6 +9,12 @@ Informatique, numérique et Internet uniquement : matériel informatique, télé
 ## Architecture
 
 - `app/api/webhook/route.ts` — webhook WhatsApp Cloud API (vérification + réception des messages)
+- `app/api/search/route.ts` — endpoint utilisé par l'interface web (formulaire de recherche)
+- `app/api/health/route.ts` — vérification réelle de l'état des services (utilisé par `/status`)
+- `app/page.tsx`, `app/ecosysteme`, `app/categorie/[slug]`, `app/publier`, `app/connexion`, `app/status` — pages du site
+- `components/NavBar.tsx`, `components/Footer.tsx` — chrome partagé, responsive avec menu mobile
+- `components/SearchExperience.tsx` — formulaire de recherche réutilisable (accueil + pages catégories)
+- `components/StatusWave.tsx` — visualisation animée de l'état d'un service sur `/status`
 - `lib/agents/orchestrator.ts` — point d'entrée qui enchaîne : image → recherche texte → extraction structurée → formatage → logging
 - `lib/agents/searchImage.ts` — reconnaissance visuelle (si l'utilisateur envoie une photo)
 - `lib/agents/searchText.ts` — recherche web ciblée (utilise l'outil `web_search` de l'API Claude)
@@ -18,6 +24,8 @@ Informatique, numérique et Internet uniquement : matériel informatique, télé
 - `lib/agents/logging.ts` — écriture des métadonnées de requête dans Firestore (jamais les résultats commerciaux)
 
 **Note d'implémentation** : le filtre de niche (`nicheFilter.ts`) est fourni prêt à l'emploi mais n'est pas appelé automatiquement dans `orchestrator.ts`, car l'agent d'extraction structurée exclut déjà tout résultat dont la niche ne correspond à aucune valeur autorisée. Si tu veux une double validation stricte, appelle `checkNiche()` sur chaque résultat avant l'extraction.
+
+**Note sur `/status`** : les indicateurs "Moteur de recherche" et "Webhook WhatsApp" reflètent uniquement la présence des variables d'environnement nécessaires (pas d'appel réel, pour éviter des coûts/latence à chaque visite). L'indicateur Firestore, lui, fait une vraie lecture à chaque chargement. C'est indiqué explicitement dans l'interface pour ne pas laisser croire à une supervision plus poussée qu'elle ne l'est.
 
 ## Variables d'environnement
 

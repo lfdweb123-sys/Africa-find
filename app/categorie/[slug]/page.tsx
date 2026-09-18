@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import SearchExperience from "@/components/SearchExperience";
 import { NICHE_CATEGORIES, getCategoryBySlug } from "@/lib/agents/niches";
+import { CATEGORY_ICONS } from "@/lib/agents/categoryIcons";
 import styles from "./page.module.css";
 
 export function generateStaticParams() {
@@ -20,10 +21,16 @@ export default function CategoriePage({
   }
 
   const others = NICHE_CATEGORIES.filter((c) => c.slug !== category!.slug);
+  const Icon = CATEGORY_ICONS[category!.slug];
 
   return (
     <main className={styles["page"]}>
       <section className={styles["hero"]}>
+        {Icon && (
+          <span className={styles["hero-icon"]}>
+            <Icon size={26} strokeWidth={1.7} />
+          </span>
+        )}
         <p className={styles["kicker"]}>
           <span className={styles["dot"]} />
           Catégorie
