@@ -1,0 +1,54 @@
+:root {
+  --ink: #10182b;
+  --ink-soft: #45506b;
+  --paper: #eceee6;
+  --paper-raised: #ffffff;
+  --gold: #d99a2b;
+  --teal: #1f7a72;
+  --line: rgba(16, 24, 43, 0.14);
+  --radius: 3px;
+  --font-display: "Space Grotesk", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+button {
+  font-family: var(--font-body);
+}
+
+:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
