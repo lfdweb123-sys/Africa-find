@@ -1,7 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
-import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 import { NICHE_CATEGORIES } from "@/lib/agents/niches";
 
 interface SearchResult {
@@ -23,10 +22,21 @@ export default function SearchExperience({
   const [text, setText] = useState("");
   const [location, setLocation] = useState("");
   const [imageFile, setImageFile] = useState<File | null>(null);
+  const [imagePreviewUrl, setImagePreviewUrl] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<SearchResult | null>(null);
   const [error, setError] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (!imageFile) {
+      setImagePreviewUrl(null);
+      return;
+    }
+    const url = URL.createObjectURL(imageFile);
+    setImagePreviewUrl(url);
+    return () => URL.revokeObjectURL(url);
+  }, [imageFile]);
 
   async function runSearch(queryText: string) {
     setLoading(true);
@@ -110,13 +120,33 @@ export default function SearchExperience({
           </div>
         </div>
         <div className="row row-actions">
-          <button
-            type="button"
-            className="attach"
-            onClick={() => fileInputRef.current?.click()}
-          >
-            {imageFile ? `Photo : ${imageFile.name}` : "Joindre une photo"}
-          </button>
+          {imagePreviewUrl ? (
+            <div className="thumb-wrap">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={imagePreviewUrl} alt="Aperçu de la photo jointe" className="thumb" />
+              <div className="thumb-meta">
+                <span className="thumb-name">{imageFile?.name}</span>
+                <button
+                  type="button"
+                  className="thumb-remove"
+                  onClick={() => {
+                    setImageFile(null);
+                    if (fileInputRef.current) fileInputRef.current.value = "";
+                  }}
+                >
+                  Retirer
+                </button>
+              </div>
+            </div>
+          ) : (
+            <button
+              type="button"
+              className="attach"
+              onClick={() => fileInputRef.current?.click()}
+            >
+              Joindre une photo
+            </button>
+          )}
           <input
             ref={fileInputRef}
             type="file"
@@ -248,6 +278,51 @@ export default function SearchExperience({
 
         .attach:hover {
           color: var(--ink);
+        }
+
+        .thumb-wrap {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          min-width: 0;
+        }
+
+        .thumb {
+          width: 40px;
+          height: 40px;
+          object-fit: cover;
+          border-radius: 6px;
+          border: 1px solid var(--line);
+          flex-shrink: 0;
+        }
+
+        .thumb-meta {
+          display: flex;
+          flex-direction: column;
+          min-width: 0;
+        }
+
+        .thumb-name {
+          font-size: 0.82rem;
+          color: var(--ink);
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          max-width: 160px;
+        }
+
+        .thumb-remove {
+          background: none;
+          border: none;
+          color: #a3312a;
+          font-size: 0.78rem;
+          cursor: pointer;
+          padding: 0;
+          text-align: left;
+        }
+
+        .thumb-remove:hover {
+          text-decoration: underline;
         }
 
         .submit {

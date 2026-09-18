@@ -68,8 +68,9 @@ export default function StatusPage() {
       <h1>État du système en temps réel</h1>
       <p className={styles["sub"]}>
         Vérification réelle toutes les 30 secondes — le moteur de recherche
-        et le webhook WhatsApp sont vérifiés par la présence de leur
-        configuration, la journalisation Firestore par une lecture réelle.
+        et la messagerie WhatsApp sont vérifiés par la présence de leur
+        configuration, la journalisation des recherches par une lecture
+        réelle.
       </p>
 
       {loading && !data && <p className={styles["loading"]}>Vérification en cours…</p>}

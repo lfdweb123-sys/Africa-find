@@ -13,12 +13,13 @@
 }
 
 .nav-inner {
-  max-width: 1120px;
+  max-width: 1280px;
   margin: 0 auto;
   padding: 14px 24px;
   display: flex;
   align-items: center;
-  gap: 32px;
+  gap: 28px;
+  flex-wrap: nowrap;
 }
 
 .brand {
@@ -47,15 +48,17 @@
 
 .links {
   display: flex;
-  gap: 24px;
+  gap: 20px;
   flex: 1;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  min-width: 0;
 }
 
 .link {
   color: var(--ink-soft);
   text-decoration: none;
-  font-size: 0.92rem;
+  font-size: 0.9rem;
+  white-space: nowrap;
 }
 
 .link:hover {
@@ -153,7 +156,7 @@
   border-radius: var(--radius);
 }
 
-@media (max-width: 860px) {
+@media (max-width: 1280px) {
   .links,
   .actions {
     display: none;

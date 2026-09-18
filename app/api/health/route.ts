@@ -21,7 +21,7 @@ async function checkFirestore(): Promise<ServiceHealth> {
     await db.collection("stats_niches").limit(1).get();
     return {
       id: "firestore",
-      label: "Journalisation (Firestore)",
+      label: "Journalisation des recherches",
       description: "Enregistrement des métadonnées de chaque recherche.",
       status: "operational",
       checkedLive: true,
@@ -30,7 +30,7 @@ async function checkFirestore(): Promise<ServiceHealth> {
   } catch {
     return {
       id: "firestore",
-      label: "Journalisation (Firestore)",
+      label: "Journalisation des recherches",
       description: "Enregistrement des métadonnées de chaque recherche.",
       status: "down",
       checkedLive: true,
@@ -43,7 +43,7 @@ function checkAnthropic(): ServiceHealth {
   const configured = Boolean(process.env.ANTHROPIC_API_KEY);
   return {
     id: "anthropic",
-    label: "Moteur de recherche (agents IA)",
+    label: "Moteur de recherche",
     description: "Recherche web, extraction et formatage des résultats.",
     status: configured ? "configured" : "down",
     checkedLive: false,
@@ -58,8 +58,8 @@ function checkWhatsApp(): ServiceHealth {
   );
   return {
     id: "whatsapp",
-    label: "Webhook WhatsApp",
-    description: "Réception et envoi de messages via WhatsApp Cloud API.",
+    label: "Messagerie WhatsApp",
+    description: "Réception et envoi de messages sur WhatsApp.",
     status: configured ? "configured" : "down",
     checkedLive: false,
   };

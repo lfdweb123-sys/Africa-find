@@ -4,13 +4,14 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import styles from "./NavBar.module.css";
 
-const links = [
+const desktopLinks = [
   { href: "/ecosysteme", label: "Explorer l'écosystème" },
   { href: "/categorie/prestataires-freelances", label: "Prestataires & Freelances" },
   { href: "/categorie/materiel-informatique", label: "Matériel & Télécoms" },
   { href: "/categorie/logiciels-saas", label: "API & Logiciels" },
-  { href: "/status", label: "Statut" },
 ];
+
+const mobileLinks = [...desktopLinks, { href: "/status", label: "Statut du service" }];
 
 export default function NavBar() {
   const [scrolled, setScrolled] = useState(false);
@@ -41,7 +42,7 @@ export default function NavBar() {
         </Link>
 
         <nav className={styles["links"]}>
-          {links.map((l) => (
+          {desktopLinks.map((l) => (
             <Link key={l.href} href={l.href} className={styles["link"]}>
               {l.label}
             </Link>
@@ -72,7 +73,7 @@ export default function NavBar() {
 
       <div className={`${styles["mobile-panel"]} ${open ? styles["mobile-panel-open"] : ""}`}>
         <nav className={styles["mobile-links"]}>
-          {links.map((l) => (
+          {mobileLinks.map((l) => (
             <Link
               key={l.href}
               href={l.href}
